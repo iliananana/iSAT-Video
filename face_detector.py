@@ -3,7 +3,7 @@ import cv2
 import face_recognition
 
 # Get a reference to webcam 
-video_capture = cv2.VideoCapture("filepath")
+video_capture = cv2.VideoCapture("iSAT-Video/videos/g1.mp4")
 
 # Initialize variables
 face_locations = []
