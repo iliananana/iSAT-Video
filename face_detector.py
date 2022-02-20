@@ -3,7 +3,7 @@ import cv2
 import face_recognition
 
 # Get a reference to webcam 
-video_capture = cv2.VideoCapture("iSAT-Video/videos/g1.mp4")
+video_capture = cv2.VideoCapture("/home/joe/ISAT/iSAT-Video/videos/g1.mp4")
 
 # Initialize variables
 face_locations = []
@@ -25,7 +25,7 @@ while True:
 
     # Display the resulting image
     cv2.imshow('Video', frame)
-
+    print((frame))
     # Hit 'q' on the keyboard to quit!
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
