@@ -43,14 +43,14 @@ while ret:
             cv2.waitKey(1)
 
             if(len(face_locations) == 1):
-                name = "1Face/Frame_" + str(frameNumber) + '.jpg'
-                #cv2.imwrite(name, curr_frame)
+                #name = "1Face/Frame_" + str(frameNumber) + '.jpg'
+                cv2.imwrite(name, curr_frame)
             if(len(face_locations) == 2):
                 name = "2Face/Frame_" + str(frameNumber) + '.jpg'
-          #      cv2.imwrite(name, curr_frame)
+                cv2.imwrite(name, curr_frame)
             if(len(face_locations) == 3):
                 name = "3Face/Frame_" + str(frameNumber) + '.jpg'
-           #     cv2.imwrite(name, curr_frame)
+                cv2.imwrite(name, curr_frame)
             
             #cv2.imwrite('Frame_' + str(frameNumber) + '.jpg', curr_frame)
             prev_frame = curr_frame
