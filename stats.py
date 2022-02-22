@@ -1,5 +1,6 @@
 # import libraries
 from ctypes import sizeof
+import subprocess
 import sys
 import time
 import numpy as np
@@ -7,19 +8,34 @@ print("pls work")
 #sys.path.append('/s/bach/g/under/videep/.local/lib/python3.8/site-packages')
 import cv2
 import face_recognition
+# import glob
+
+
+# for video in list(glob.glob("/Users/ilianacastillon/Research/videos/NXG/*.avi")):
+#     print(video)
+
+video = '/Users/ilianacastillon/Desktop/HBLGT.mp4'
+# video = '/Users/ilianacastillon/Research/videos/NXG/G01_NXG.avi'
 
 # Get a reference to webcam 
-video_capture = cv2.VideoCapture("videos/g1.mp4")
+#fps = subprocess.call('ffmpeg -i ' + video + ' 2>&1 | sed -n "s/.*, \(.*\) fp.*/\1/p"')
+fps = subprocess.run(['ffmpeg','-i',video, '-n', '"s/.*, \(.*\) fp.*/\1/p"'])#/Users/ilianacastillon/Research/videos/NXG/G01_NXG.avi')
+print(fps)
+video_capture = cv2.VideoCapture(video)
 
 # Initialize variables
 frameNumber=0
 face_locations = []
 ret, prev_frame = video_capture.read()
 
+#get fps from open cv
 p_frame_thresh = 900000
 totalFaces = 0
 numberOfKeyFrames = 0
 name = ""
+oneCount = 0
+twoCount = 0
+threeCount = 0
 while ret:
     # Grab a single frame of video
     ret, curr_frame = video_capture.read()
@@ -43,18 +59,26 @@ while ret:
             cv2.waitKey(1)
 
             if(len(face_locations) == 1):
-                #name = "1Face/Frame_" + str(frameNumber) + '.jpg'
-                cv2.imwrite(name, curr_frame)
+                name = "1Face/Frame_" + str(frameNumber) + '.jpg'
+                #cv2.imwrite(name, curr_frame)
+                oneCount=oneCount+1
             if(len(face_locations) == 2):
                 name = "2Face/Frame_" + str(frameNumber) + '.jpg'
-                cv2.imwrite(name, curr_frame)
+                #cv2.imwrite(name, curr_frame)
+                twoCount=twoCount+1
             if(len(face_locations) == 3):
                 name = "3Face/Frame_" + str(frameNumber) + '.jpg'
-                cv2.imwrite(name, curr_frame)
-            
+               # cv2.imwrite(name, curr_frame)
+                threeCount=threeCount+1
             #cv2.imwrite('Frame_' + str(frameNumber) + '.jpg', curr_frame)
             prev_frame = curr_frame
-print("Percent faces - " + str(totalFaces / (numberOfKeyFrames *3 )))
+
+print("Percent one face detected - " + str(oneCount / (numberOfKeyFrames *3 )))
+print("Percent two faces are detected - " + str(twoCount / (numberOfKeyFrames *3 )))
+print("Percent three faces are detected - " + str(threeCount / (numberOfKeyFrames *3 )))
+print("Percent of faces detected - " + str(totalFaces / (numberOfKeyFrames *3 )))
+print(str(numberOfKeyFrames))
+
 # Release handle to the webcam
 video_capture.release()
 cv2.destroyAllWindows()
