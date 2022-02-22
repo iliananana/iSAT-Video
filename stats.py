@@ -14,13 +14,13 @@ import face_recognition
 # for video in list(glob.glob("/Users/ilianacastillon/Research/videos/NXG/*.avi")):
 #     print(video)
 
-video = '/Users/ilianacastillon/Desktop/HBLGT.mp4'
-# video = '/Users/ilianacastillon/Research/videos/NXG/G01_NXG.avi'
+video = '/Users/ilianacastillon/Desktop/HBLGT1.mp4'
+# video = '/Users/ilianacastillon/Research/videos/LGT/G02_LGT.avi'
 
 # Get a reference to webcam 
 #fps = subprocess.call('ffmpeg -i ' + video + ' 2>&1 | sed -n "s/.*, \(.*\) fp.*/\1/p"')
-fps = subprocess.run(['ffmpeg','-i',video, '-n', '"s/.*, \(.*\) fp.*/\1/p"'])#/Users/ilianacastillon/Research/videos/NXG/G01_NXG.avi')
-print(fps)
+# fps = subprocess.run(['ffmpeg','-i',video, '-n', '"s/.*, \(.*\) fp.*/\1/p"'])#/Users/ilianacastillon/Research/videos/NXG/G01_NXG.avi')
+# print(fps)
 video_capture = cv2.VideoCapture(video)
 
 # Initialize variables
@@ -29,7 +29,7 @@ face_locations = []
 ret, prev_frame = video_capture.read()
 
 #get fps from open cv
-p_frame_thresh = 900000
+p_frame_thresh = 306923.4349024015
 totalFaces = 0
 numberOfKeyFrames = 0
 name = ""
@@ -44,6 +44,7 @@ while ret:
     if ret:
         diff = cv2.absdiff(curr_frame, prev_frame)  #compute the difference between frames 
         non_zero_count = np.count_nonzero(diff) 
+        print(non_zero_count)
         if non_zero_count > p_frame_thresh:         #checks if the current frame is unique
             rgb_frame = curr_frame[:, :, ::-1]      # Convert the image from BGR color
             # Find all the faces in the current frame of video
