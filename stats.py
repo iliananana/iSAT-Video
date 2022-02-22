@@ -14,7 +14,7 @@ import face_recognition
 # for video in list(glob.glob("/Users/ilianacastillon/Research/videos/NXG/*.avi")):
 #     print(video)
 
-video = '/Users/ilianacastillon/Desktop/HBLGT1.mp4'
+video = '/Users/ilianacastillon/Desktop/HBLGT.mp4'
 # video = '/Users/ilianacastillon/Research/videos/LGT/G02_LGT.avi'
 
 # Get a reference to webcam 
@@ -72,7 +72,7 @@ while ret:
                # cv2.imwrite(name, curr_frame)
                 threeCount=threeCount+1
             #cv2.imwrite('Frame_' + str(frameNumber) + '.jpg', curr_frame)
-            prev_frame = curr_frame
+        prev_frame = curr_frame
 
 print("Percent one face detected - " + str(oneCount / (numberOfKeyFrames *3 )))
 print("Percent two faces are detected - " + str(twoCount / (numberOfKeyFrames *3 )))
